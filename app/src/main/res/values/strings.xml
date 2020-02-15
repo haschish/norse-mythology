@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Scandinavian-mythology</string>
+    <string-array name="division_list">
+        <item>Боги</item>
+        <item>Богини</item>
+        <item>Герои</item>
+        <item>Мифы</item>
+        <item>Великаны</item>
+    </string-array>
+</resources>

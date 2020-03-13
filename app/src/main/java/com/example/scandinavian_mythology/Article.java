@@ -9,9 +9,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Article {
+    private static final String JSON_ID = "id";
     private static final String JSON_TITLE = "title";
     private static final String JSON_DESCRIPTION = "description";
     private static final String JSON_FILENAME = "filename";
+
+    private String id;
     private String name;
     private String description;
     private String fileName;
@@ -23,8 +26,13 @@ public class Article {
     }
 
     public Article(JSONObject jo) throws JSONException {
+        id = jo.getString(JSON_ID);
         name = jo.getString(JSON_TITLE);
         description = jo.getString(JSON_DESCRIPTION);
+    }
+
+    public String getId() {
+        return id;
     }
 
     public String getName() {

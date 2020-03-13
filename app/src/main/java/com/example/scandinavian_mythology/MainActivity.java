@@ -19,10 +19,14 @@ public class MainActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (position == 0) {
-                    Intent intent = new Intent(MainActivity.this, ListActivity.class);
-                    startActivity(intent);
+                String fileName;
+                switch (position) {
+                    case 0: fileName = "gods.json"; break;
+                    default: fileName = "";
                 }
+                Intent intent = new Intent(MainActivity.this, ListActivity.class);
+                intent.putExtra(ListActivity.EXTRA_FILENAME, fileName);
+                startActivity(intent);
             }
         });
 

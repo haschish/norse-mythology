@@ -1,6 +1,5 @@
 package com.example.scandinavian_mythology;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -11,18 +10,17 @@ import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.ViewGroup;
 
 import org.json.JSONArray;
 import org.json.JSONTokener;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class ListActivity extends AppCompatActivity {
+    public static final String EXTRA_FILENAME = "filename";
     ArrayList<Article> list = new ArrayList<>();
     ArticleAdapter adapter;
 
@@ -30,6 +28,10 @@ public class ListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
+
+        Intent intent = getIntent();
+        String fileName = intent.getExtras().getString(EXTRA_FILENAME);
+
 
 //        Article odin = new Article("Один", "верховный бог в германо-скандинавской мифологии");
 //        Article tor = new Article("Тор", "один из асов, бог грома и бури, защищающий богов и людей от великанов и чудовищ");
@@ -45,17 +47,20 @@ public class ListActivity extends AppCompatActivity {
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         recyclerView.setAdapter(adapter);
 
-        loadJson();
+        loadJson(fileName);
     }
 
     public void showArticle(int adapterPosition) {
-//        Intent intent = new Intent(this)
+        Article article = list.get(adapterPosition);
+        Intent intent = new Intent(this, WebActivity.class);
+        intent.putExtra(WebActivity.EXTRA_ID, article.getId());
+        startActivity(intent);
     }
 
-    private void loadJson() {
+    private void loadJson(String fileName) {
         AssetManager am = getAssets();
         BufferedReader reader = null;
-        try (InputStream in = am.open("test.json")) {
+        try (InputStream in = am.open(fileName)) {
 
             reader = new BufferedReader(new InputStreamReader(in));
             StringBuilder jsonString = new StringBuilder();

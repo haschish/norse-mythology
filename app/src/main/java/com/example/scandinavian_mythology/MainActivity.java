@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
                 String fileName;
                 switch (position) {
                     case 0: fileName = "gods.json"; break;
+                    case 1: fileName = "goddesses.json"; break;
                     default: fileName = "";
                 }
                 Intent intent = new Intent(MainActivity.this, ListActivity.class);

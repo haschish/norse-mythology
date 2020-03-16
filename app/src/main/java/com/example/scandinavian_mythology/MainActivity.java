@@ -15,22 +15,25 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ListView listView = findViewById(R.id.division_list);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        ListView sectionList = findViewById(R.id.sectionList);
+        View header = getLayoutInflater().inflate(R.layout.header_image, sectionList, false);
+        sectionList.addHeaderView(header, null, false);
+        sectionList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String fileName;
-                switch (position) {
-                    case 0: fileName = "gods.json"; break;
-                    case 1: fileName = "goddesses.json"; break;
-                    default: fileName = "";
-                }
-                Intent intent = new Intent(MainActivity.this, ListActivity.class);
-                intent.putExtra(ListActivity.EXTRA_FILENAME, fileName);
-                startActivity(intent);
+            String fileName;
+            position -= 1;
+
+            switch (position) {
+                case 0: fileName = "gods.json"; break;
+                case 1: fileName = "goddesses.json"; break;
+                default: fileName = "";
+            }
+
+            Intent intent = new Intent(MainActivity.this, ListActivity.class);
+            intent.putExtra(ListActivity.EXTRA_FILENAME, fileName);
+            startActivity(intent);
             }
         });
-
-
     }
 }

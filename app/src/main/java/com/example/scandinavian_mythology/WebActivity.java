@@ -9,6 +9,7 @@ import android.webkit.WebViewClient;
 
 public class WebActivity extends AppCompatActivity {
     public static final String EXTRA_ID = "id";
+    private WebView webView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,8 +18,17 @@ public class WebActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String id = intent.getExtras().getString(EXTRA_ID);
-        WebView webView = (WebView) findViewById(R.id.webView);
+        webView = (WebView) findViewById(R.id.webView);
         webView.setWebViewClient(new WebViewClient());
         webView.loadUrl("file:///android_asset/html/" + id + "/index.html");
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (webView.canGoBack()) {
+            webView.goBack();
+        } else {
+            super.onBackPressed();
+        }
     }
 }

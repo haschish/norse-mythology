@@ -3,6 +3,7 @@ package com.example.scandinavian_mythology;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -30,8 +31,12 @@ public class MainActivity extends AppCompatActivity {
                 default: fileName = "";
             }
 
+            Resources res = getResources();
+            String[] sectionList = res.getStringArray(R.array.division_list);
+
             Intent intent = new Intent(MainActivity.this, ListActivity.class);
             intent.putExtra(ListActivity.EXTRA_FILENAME, fileName);
+            intent.putExtra(ListActivity.EXTRA_TITLE, sectionList[position]);
             startActivity(intent);
             }
         });

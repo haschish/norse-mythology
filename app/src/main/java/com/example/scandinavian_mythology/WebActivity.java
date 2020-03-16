@@ -9,15 +9,20 @@ import android.webkit.WebViewClient;
 
 public class WebActivity extends AppCompatActivity {
     public static final String EXTRA_ID = "id";
+    public static final String EXTRA_TITLE = "title";
     private WebView webView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_web);
 
         Intent intent = getIntent();
-        String id = intent.getExtras().getString(EXTRA_ID);
+        String id = intent.getStringExtra(EXTRA_ID);
+        String title = intent.getStringExtra(EXTRA_TITLE);
+
+        setTitle(title);
+        setContentView(R.layout.activity_web);
+
         webView = (WebView) findViewById(R.id.webView);
         webView.setWebViewClient(new WebViewClient());
         webView.loadUrl("file:///android_asset/html/" + id + "/index.html");

@@ -21,23 +21,20 @@ import java.util.ArrayList;
 
 public class ListActivity extends AppCompatActivity {
     public static final String EXTRA_FILENAME = "filename";
+    public static final String EXTRA_TITLE = "title";
     ArrayList<Article> list = new ArrayList<>();
     ArticleAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list);
-
+//        getSupportActionBar().hide();
         Intent intent = getIntent();
         String fileName = intent.getExtras().getString(EXTRA_FILENAME);
+        String title = intent.getStringExtra(EXTRA_TITLE);
 
-
-//        Article odin = new Article("Один", "верховный бог в германо-скандинавской мифологии");
-//        Article tor = new Article("Тор", "один из асов, бог грома и бури, защищающий богов и людей от великанов и чудовищ");
-//
-//        list.add(odin);
-//        list.add(tor);
+        setTitle(title);
+        setContentView(R.layout.activity_list);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
@@ -54,6 +51,7 @@ public class ListActivity extends AppCompatActivity {
         Article article = list.get(adapterPosition);
         Intent intent = new Intent(this, WebActivity.class);
         intent.putExtra(WebActivity.EXTRA_ID, article.getId());
+        intent.putExtra(WebActivity.EXTRA_TITLE, article.getName());
         startActivity(intent);
     }
 

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Scandinavian-mythology</string>
+    <string name="app_name">Скандинавская мифология</string>
     <string-array name="division_list">
         <item>Боги</item>
         <item>Богини</item>
